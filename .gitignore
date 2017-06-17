@@ -1,0 +1,8 @@
+# ignore binaries created upon compilation
+*.class
+
+# ignore simulation files and data files
+*.csv
+
+# ignore all directories containing simulation data
+Simul*/
