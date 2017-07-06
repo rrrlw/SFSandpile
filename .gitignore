@@ -1,5 +1,7 @@
 # ignore binaries created upon compilation
 *.class
+*.bluej
+*.ctxt
 
 # ignore simulation files and data files
 *.csv
