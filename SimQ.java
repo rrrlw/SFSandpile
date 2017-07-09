@@ -39,6 +39,6 @@ public class SimQ
 		else if (size == 0)
 			return null;
 		else
-			throw new RuntimeException("Something wrong with the code here.");
+			throw new RuntimeException("Something wrong if the code reached here.");
 	}
 }
