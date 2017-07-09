@@ -126,7 +126,7 @@ public class ParamSet
 	{
 		randRedist = set;
 	}
-	public boolean get NonConserveRedist()
+	public boolean getNonConserveRedist()
 	{
 		return ncRedist;
 	}
