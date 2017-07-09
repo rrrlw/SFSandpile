@@ -47,6 +47,10 @@ public class ParamSet
 	}
 	
 	//setter methods (include checks)
+	public double getBeta()
+	{
+		return beta;
+	}
 	public void setBeta(double set)
 	{
 		if (set < -EPS || set > 1.0 + EPS)
@@ -58,12 +62,20 @@ public class ParamSet
 			
 		beta = set;
 	}
+	public double getEpsilon()
+	{
+		return epsilon;
+	}
 	public void setEpsilon(double set)
 	{
 		if (set < EPS)
 			customExcept("epsilon", df.format(set));
 		
 		epsilon = set;
+	}
+	public double getDNC()
+	{
+		return dnc;
 	}
 	public void setDNC(double set)
 	{
@@ -76,12 +88,20 @@ public class ParamSet
 		
 		dnc = set;
 	}
+	public double getSigma()
+	{
+		return sigma;
+	}
 	public void setSigma(double set)
 	{
 		if (set < EPS)
 			customExcept("sigma", df.format(set));
 			
 		sigma = set;
+	}
+	public double getThresh()
+	{
+		return threshold;
 	}
 	public void setThresh(double set)
 	{
@@ -90,13 +110,25 @@ public class ParamSet
 			
 		threshold = set;
 	}
+	public boolean getRandExtract()
+	{
+		return randExtract;
+	}
 	public void setRandExtract(boolean set)
 	{
 		randExtract = set;
 	}
+	public boolean getRandRedist()
+	{
+		return randRedist;
+	} 
 	public void setRandRedist(boolean set)
 	{
 		randRedist = set;
+	}
+	public boolean get NonConserveRedist()
+	{
+		return ncRedist;
 	}
 	public void setNonConserveRedist(boolean set)
 	{
@@ -105,6 +137,10 @@ public class ParamSet
 		if (!ncRedist)
 			dnc = 1.0;
 	}
+	public boolean getStochThresh()
+	{
+		return stochThreshold;
+	}
 	public void setStochThresh(boolean set)
 	{
 		stochThreshold = set;
@@ -112,13 +148,25 @@ public class ParamSet
 		if (!stochThreshold)
 			sigma = 0.0;
 	}
+	public boolean getWalled()
+	{
+		return walled;
+	}
 	public void setWalled(boolean set)
 	{
 		walled = set;
 	}
+	public int getSeed()
+	{
+		return seed;
+	}
 	public void setSeed(int set)
 	{
 		seed = set;
+	}
+	public int getSimSteps()
+	{
+		return simSteps;
 	}
 	public void setSimSteps(int set)
 	{
@@ -127,12 +175,20 @@ public class ParamSet
 			
 		simSteps = set;
 	}
+	public int getEquilSteps()
+	{
+		return equilSteps;
+	}
 	public void setEquilSteps(int set)
 	{
 		if (set < 0)
 			customExcept("equilibration steps", Integer.toString(set));
 			
 		equilSteps = set;
+	}
+	public int getWidth()
+	{
+		return width;
 	}
 	public void setWidth(int set)
 	{
@@ -141,12 +197,20 @@ public class ParamSet
 			
 		width = set;
 	}
+	public int getHeight()
+	{
+		return height;
+	}
 	public void setHeight(int set)
 	{
 		if (set <= 0)
 			customExcept("height", Integer.toString(set));
 			
 		height = set;
+	}
+	public int getNum()
+	{
+		return width * height;
 	}
 	
 	//csv format i/o methods
