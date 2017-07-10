@@ -8,3 +8,6 @@
 
 # ignore all directories containing simulation data
 Simul*/
+
+# ignore Makefile
+Makefile
