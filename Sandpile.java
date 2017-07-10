@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 public class Sandpile
 {
     //member variables
-    private int num;
+    private int num;	//width * height
     private double[] a, b,
                      slope;
     private LinkedList<IntDbl> changes;
@@ -24,6 +24,81 @@ public class Sandpile
     private Random generator;
                     
     //constructor
+    /*double[] initialA, int setNum,
+                    boolean[][] setConnect, double setThresh,
+                    double setSigma, double setDNC,
+                    boolean setRedist, boolean setExtract,
+                    boolean setSig, boolean setNoncons,
+                    int setSeed*/
+    public Sandpile(ParamSet params)
+    {
+    	//make vars same as constructor below
+    	double[] initialA = new double[params.getWidth() * params.getHeight()];
+    	int setNum = params.getWidth() * params.getHeight(),
+    		setSeed = params.getSeed();
+    	boolean[][] setConnect;
+    	if (!params.getWalled())
+			setConnect = ConnGenerator.wattsStrogatz(params.getHeight(), params.getWidth(), false, params.getBeta());
+		else
+			setConnect = ConnGenerator.wattsStrogatz(params.getHeight(), params.getWidth(), true, params.getBeta());
+    	double setThresh = params.getThresh(),
+    		   setDNC = params.getDNC(),
+    		   setSigma = params.getSigma();
+    	boolean setRedist = params.getRandRedist(),
+    			setExtract= params.getRandExtract(),
+    			setSig = params.getStochThresh(),
+    			setNoncons = params.getNonConserveRedist();
+    	
+    	//everything below here should be the exact same as the constructor below
+    	//set basic variables
+        num = setNum;
+        threshold = setThresh;
+        sigma = setSigma;
+        dnc = setDNC;
+        randRedist = setRedist;
+        randExtract = setExtract;
+        seed = setSeed;
+        generator = new Random(seed);
+        stochThresh = setSig;
+        noncons = setNoncons;
+        
+        //instantiate currently unused variables - empty or filled with zeros
+        changes = new LinkedList<IntDbl>();
+        unstable = new LinkedList<Integer>();
+        a = new double[num];
+        for (int i = 0; i < num; i++)
+            a[i] = initialA[i];
+        slope = new double[num];
+        
+        //convert adjacency matrix into adjacency list
+        int[] lengths = new int[num];
+        int i, j;
+        for (i = 0; i < num; i++)
+            for (j = 0; j < num; j++)
+                if (setConnect[i][j])
+                    lengths[i]++;
+        
+        connect = new int[num][];
+        int counter;
+        for (i = 0; i < num; i++)
+        {
+            counter = 0;
+            connect[i] = new int[lengths[i]];
+            for (j = 0; j < num; j++)
+                if (setConnect[i][j])
+                    connect[i][counter++] = j;
+        }
+        for (i = 0; i < num; i++)
+        {
+            slope[i] = slopeAt(i);
+            if (slope[i] > nextThresh(i))
+                unstable.add(i);
+        }
+        
+        //DEBUG
+        /*for (i = 0; i < connect.length; i++)
+            System.out.println(Arrays.toString(connect[i]));*/
+    }
     public Sandpile(double[] initialA, int setNum,
                     boolean[][] setConnect, double setThresh,
                     double setSigma, double setDNC,
